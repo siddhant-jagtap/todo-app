@@ -1,0 +1,12 @@
+<table class="border border-black">
+  <tr>
+    <th>Index No</th>
+    <th>Item</th>
+    <th>Action</th>
+  </tr>
+    <tr *ngFor="let item of ItemList; let i = index" >
+      <td>{{ i + 1 }}</td>
+      <td>{{  item }}</td>
+      <td> <button (click)="onDelete(item)">delete</button> </td>
+    </tr>
+</table>
