@@ -11,15 +11,17 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './popup-task.component.css'
 })
 export class PopupTaskComponent{
-  task: string = "Take a Bath at 7:30 am";
-  @Output()closePopup = new EventEmitter<boolean>;
+  @Input() task: string = "";
+  @Output() closePopup = new EventEmitter<boolean>;
   @Output() clicked = new EventEmitter<string>();
   onCancelBtn(){
     this.closePopup.emit(false);
   }
 
   onSubmitBtn() {
-    this.clicked.emit(this.task);
+    if (this.task.trim()) {
+      this.clicked.emit(this.task);
+    }
     this.task = "";
   }
 }

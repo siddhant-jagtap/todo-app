@@ -1,12 +1,15 @@
 import {Component, EventEmitter, OnChanges, OnInit} from '@angular/core';
-import {Input} from '@angular/core';
-import {NgForOf} from '@angular/common';
+import {Input, Output } from '@angular/core';
+import {NgForOf, NgIf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-item-list',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf,
+    FormsModule
   ],
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.css'
@@ -14,7 +17,7 @@ import {NgForOf} from '@angular/common';
 export class ItemListComponent implements OnChanges , OnInit{
   @Input() item: any;
   ItemList: string[] = [];
-  // @Output deleteBtn = new EventEmitter<any>;
+  @Output() editBtn = new EventEmitter<any>;
 
 
   ngOnInit() {
@@ -30,12 +33,16 @@ export class ItemListComponent implements OnChanges , OnInit{
     }
   }
 
-
   onDelete(e: any){
    this.ItemList = this.ItemList.filter(item => {
       return e !== item;
     })
     localStorage.setItem("item", JSON.stringify(this.ItemList));
+  }
+
+  onEdit(e: any){
+     debugger;
+     this.editBtn.emit(e);
   }
 
   protected readonly localStorage = localStorage;
