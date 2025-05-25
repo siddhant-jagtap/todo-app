@@ -1,8 +1,8 @@
   <div>
     <app-header></app-header>
     <app-dashboard-cards></app-dashboard-cards>
-    <app-item-list [item]=task></app-item-list>
+    <app-item-list [item]=task (editBtn)="onEditPopup($event)"></app-item-list>
     <app-create-btn (clicked)="handleCreateBtn($event)"></app-create-btn>
-    <app-popup-task *ngIf="isVisiblePopup" (closePopup)="handleCreateBtn($event)" (clicked)="handleSubmit($event)"></app-popup-task>
+    <app-popup-task *ngIf="isVisiblePopup"  [task]="task" (closePopup)="handleCreateBtn($event)" (clicked)="handleSubmit($event)"></app-popup-task>
   </div>
 
